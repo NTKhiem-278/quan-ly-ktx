@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>KTX Sinh viên — Hệ thống quản lý ký túc xá</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ================= ĐĂNG NHẬP / ĐĂNG KÝ ================= -->
+    <div class="auth-wrap show" id="authWrap">
+      <div class="auth-card">
+        <div class="auth-head">
+          <div class="mark">KT</div>
+          <div>
+            <b>KTX Sinh viên</b><span>Trường ĐH Bách Thành · Cổng thông tin nội trú</span>
+          </div>
+        </div>
+
+        <div class="auth-tabs" role="tablist">
+          <button id="tabLogin" class="on" onclick="switchAuth('login')">Đăng nhập</button>
+          <button id="tabReg" onclick="switchAuth('reg')">Đăng ký</button>
+        </div>
+
+        <div class="auth-body" id="loginForm">
+          <div class="auth-msg" id="loginMsg"></div>
+          <div class="field">
+            <label>Tên đăng nhập</label>
+            <input id="lgUser" placeholder="sv21001" autocomplete="username" />
+          </div>
+          <div class="field">
+            <label>Mật khẩu</label>
+            <input id="lgPass" type="password" placeholder="••••••••" autocomplete="current-password" />
+          </div>
+          <button class="btn p" style="justify-content: center; padding: 11px" onclick="doLogin()">Đăng nhập</button>
+
+          <div class="quick">
+            <div class="muted" style="font-size: 12.5px">Tài khoản demo (mật khẩu: <b>123456</b>):</div>
+            <button onclick="fillLogin('sv21001')">🎓 <b>Sinh viên</b> — sv21001 (Nguyễn Minh)</button>
+            <button onclick="fillLogin('letan.a')">🛎️ <b>Lễ tân</b> — letan.a (Phạm Thị Lan)</button>
+          </div>
+        </div>
+
+        <div class="auth-body hide" id="regForm">
+          <div class="auth-msg" id="regMsg"></div>
+          <div class="field"><label>Họ và tên</label><input id="rgName" placeholder="Nguyễn Văn A" /></div>
+          <div class="field"><label>Tên đăng nhập</label><input id="rgUser" placeholder="sv21027" autocomplete="username" /></div>
+          <div class="field"><label>Email</label><input id="rgMail" type="email" placeholder="a.nguyen@sv.edu.vn" /></div>
+          <div class="field"><label>Mật khẩu</label><input id="rgPass" type="password" placeholder="Ít nhất 6 ký tự" /></div>
+          <div class="field"><label>Xác nhận mật khẩu</label><input id="rgPass2" type="password" placeholder="Nhập lại mật khẩu" /></div>
+          <div class="field">
+            <label>Bạn đăng ký với vai trò</label>
+            <select id="rgRole">
+              <option value="Sinh viên">Sinh viên nội trú</option>
+            </select>
+          </div>
+          <button class="btn k" style="justify-content: center; padding: 11px" onclick="doRegister()">Tạo tài khoản</button>
+          <p class="muted" style="margin: 0; font-size: 12.6px">Tài khoản Lễ tân do ban quản lý cấp.</p>
+        </div>
+
+        <div class="auth-foot">Hỗ trợ kỹ thuật: 024 3868 1234 · hotro@ktx.edu.vn</div>
+      </div>
+    </div>
+
+    <!-- ================= ỨNG DỤNG ================= -->
+    <div class="app" id="appRoot">
+      <aside class="side" id="side">
+        <div class="brand">
+          <div class="mark">KT</div>
+          <div><b>KTX Sinh viên</b><span>Trường ĐH Bách Thành</span></div>
+        </div>
+        <nav class="nav" id="nav"></nav>
+        <div class="side-foot">
+          Khu A · Khu B · Khu C<br />Hỗ trợ: 024 3868 1234
+          <button onclick="doLogout()">Đăng xuất</button>
+        </div>
+      </aside>
+
+      <div class="main">
+        <header class="top">
+          <button class="mobtn" onclick="document.getElementById('side').classList.toggle('open')" aria-label="Mở menu">☰</button>
+          <div>
+            <h1 id="pgTitle">Tổng quan</h1>
+            <div class="sub" id="pgSub"></div>
+          </div>
+          <div class="roleswitch" role="tablist" id="roleSwitch"></div>
+          <div class="who">
+            <div class="avt" id="whoAvt">NM</div>
+            <div class="txt">
+              <b id="whoName">Nguyễn Minh</b><span id="whoRole">Sinh viên</span>
+            </div>
+            <button class="logout" onclick="doLogout()">Thoát</button>
+          </div>
+        </header>
+        <div class="wrap" id="view"></div>
+      </div>
+    </div>
+
+    <div class="veil" id="veil"><div class="modal" id="modal"></div></div>
+    <div class="toast" id="toast"></div>
+
+    <script src="js/api.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/pages-sv.js"></script>
+    <script src="js/pages-lt.js"></script>
+    <script src="js/modals.js"></script>
+    <script src="js/navigation.js"></script>
+  </body>
+</html>
